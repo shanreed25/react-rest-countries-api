@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+
+:root {
+  color-scheme: light;
+  --page-bg: hsl(0, 0%, 98%);
+  --element: hsl(0, 0%, 100%);
+  --main-text: hsl(200, 15%, 8%);
+  --muted-text: hsl(0, 0%, 40%);
+}
+
+@theme {
+  --font-sans: "Nunito Sans", sans-serif;
+}
+
+
+@theme inline {
+  --color-page-bg: var(--page);
+  --color-element-bg: var(--element);
+  --color-main-text: var(--ink);
+  --color-muted-text: var(--muted);
+}
