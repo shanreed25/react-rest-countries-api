@@ -24,6 +24,7 @@ export type ApiCountryObject = {
 
 
 // For API Wrapper Object: body from GET /countries/v5
+//Success Shape
 export type ApiWrapperObject = {
   data: {//top-level key the API wraps everything in
     objects: ApiCountryObject[];//array of countries
@@ -39,3 +40,28 @@ export type Country = {
 
 //the state of the app value, can only have one of three possible states
 export type CountriesState = { status: "loading" } | { status: "success"; countries: Country[] } | { status: "error"; error: Error };
+
+/*
+failures are wrapped in a list called errors something like:
+{
+  "errors": [
+    {
+      "message": "Invalid API key.",
+      "code": "invalid_api_key"
+    },
+    {
+      "message": "Limit must be an integer between 1 and 100.",
+      "code": "general.limit_out_of_range"
+    }
+  ]
+  But Typescript does not know what failed response shape looks like and it will be any type
+  making it hard to catch mistakes,
+  Need a type to tell typescript that a failed response has this shape
+  failed responses can have no body so the error must be optional
+*/
+export type ApiErrorResponse = {
+  //the errors object is oprional but the message and code are not
+  //if there is and error object it must have both
+  //[] makes these objects a list of objects
+  errors?: {message: string; code: string;}[];
+}

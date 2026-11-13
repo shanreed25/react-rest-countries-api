@@ -1,4 +1,5 @@
-import type { ApiWrapperObject } from "../types/country";
+import type { ApiWrapperObject, ApiErrorResponse } from "../types/country";
+import { ApiError } from "./ApiError";
 
 
 /*
@@ -30,6 +31,39 @@ export function createCountriesUrl(offset = 0): string {
 
 
 /*
+Turns a failed response into an ApiError so I 
+have a message that says what to fix
+*/
+
+async function createApiError(res: Response): Promise<ApiError> {
+  let apiMessage: string | undefined;
+
+  try {
+    const body = (await res.json()) as ApiErrorResponse;
+    apiMessage = body.errors?.[0]?.message; // first message in the errors list, if there is one
+  } catch {
+    // the apiMessage is still undefined
+    // an empty catch does nothing so the code moves to the switch
+  }
+
+  switch (res.status) {
+    case 401:
+      return new ApiError("API Key rejected.", 401);
+    case 403:
+      return new ApiError("Your monthly request limit has been reached.", 403);
+    case 429:
+      return new ApiError("Too many requests, Try again later.", 429);
+    default:
+      // if anything else use the API's message, or `The API returned an erro....`
+      return new ApiError(
+        apiMessage ?? `The API returned an error (status ${res.status}).`,
+        res.status,
+      );
+  }
+}
+
+
+/*
 Send the request with the key
 needs to wait for request
 return a promise of the ApiWrapperObject type
@@ -43,20 +77,28 @@ export async function getCountries(offset = 0): Promise<ApiWrapperObject> {
   const apiKey = VITE_RESTCOUNTRIES_API_KEY;
 
   if (!apiKey) {
-    throw new Error("Missing VITE_RESTCOUNTRIES_API_KEY in .env.local");
+    throw new ApiError("Missing VITE_RESTCOUNTRIES_API_KEY in .env.local", 0);//using 0 because the server never answered, so there’s no real status
   }
+
+  // I nned to acces response after try/catch
+  let response: Response;//when you call fetch, the browser gives back a Response object same object as response.ok, response.status etc...
+
 
   /*
   with each request it need an API Key 
   */
-  const response = await fetch(createCountriesUrl(offset), {
+ try{
+  response = await fetch(createCountriesUrl(offset), {
     headers: { //using headers is safer
         Authorization: `Bearer ${apiKey}` 
     },
   });
+} catch {//there is no response at all because no internet or browser blocked request
+   throw new ApiError("Could not reach the API. Check your internet connection and that this site's hostname is on your API key's allowed list.", 0)
+}
 
-  if (!response.ok) {
-    throw new Error(`Request failed with status ${response.status}`);
+  if (!response.ok) {//there is an error that the server responed with
+    throw await createApiError(response);//create a clear error message
   }
 
   return response.json();
