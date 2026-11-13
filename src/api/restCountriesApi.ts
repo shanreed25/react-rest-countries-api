@@ -72,7 +72,7 @@ return a promise of the ApiWrapperObject type
  the response is an an object...{data: {…}} data.objects is an array that holds 100 country objects
 ```
 */
-export async function getCountries(offset = 0): Promise<ApiWrapperObject> {
+export async function getCountries(offset = 0, signal?:AbortSignal): Promise<ApiWrapperObject> {
     
   const apiKey = VITE_RESTCOUNTRIES_API_KEY;
 
@@ -92,8 +92,15 @@ export async function getCountries(offset = 0): Promise<ApiWrapperObject> {
     headers: { //using headers is safer
         Authorization: `Bearer ${apiKey}` 
     },
+    signal: signal,//fetch watches this and stops the request when abort() is called
   });
-} catch {//there is no response at all because no internet or browser blocked request
+} catch(err) {
+  // if  abort() is called, this will throw the same error again and the useEffect will ignore it
+  if(signal?.aborted){
+    throw err
+  }
+
+  //there is no response at all because no internet or browser blocked request
    throw new ApiError("Could not reach the API. Check your internet connection and that this site's hostname is on your API key's allowed list.", 0)
 }
 

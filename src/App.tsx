@@ -14,7 +14,8 @@ function App() {
   const [state, setState] = useState<CountriesState>({ status: "loading" }); //loading is the starting state
 
   useEffect(() => {
-    getCountries() //returns a promise
+    const controller = new AbortController();
+    getCountries(0, controller.signal) //returns a promise
       .then((res) => {
         const appCountries = res.data.objects.map(convertAPICountryObject);
         setState({
@@ -24,12 +25,21 @@ function App() {
         });
       })
       .catch((err: unknown) => {
+        //don't show an error message for a canceled request
+        if (controller.signal.aborted) {
+          return;
+        }
+
+
         setState({
           //change loading for error and save the Error
           status: "error",
-          error: err instanceof Error ? err : new Error(String(err)), //kepp if it is and Error, if not make it one
+          error: err instanceof Error ? err : new Error(String(err)), //keep if it is and Error, if not make it one
         });
       });
+
+      return () => {controller.abort()};
+
   }, []);
 
   if (state.status === "loading") {
