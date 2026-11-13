@@ -37,21 +37,5 @@ export type Country = {
   code: string;
 };
 
-/*
-turn the ApiCountryObject into the shape of the Country type
-From: { names: { common: "Canada" }, codes: { alpha_3: "CAN" } }
-To: { name: "Canada", code: "CAN" }
-Test in App.tsx: getCountries().then((response) => {
-  console.log(response.data.objects.map(convertAPICountryObject));//Pass the function itself, without parentheses. map calls it once per item
-});
-results should be an array of 100 flat objects like { name: "Afghanistan", code: "AFG" }
-*/
-export function convertAPICountryObject(apiCountryObject: ApiCountryObject): Country {
-  return {
-    name: apiCountryObject.names.common,
-    code: apiCountryObject.codes.alpha_3,
-  };
-}
-
-
+//the state of the app value, can only have one of three possible states
 export type CountriesState = { status: "loading" } | { status: "success"; countries: Country[] } | { status: "error"; error: Error };

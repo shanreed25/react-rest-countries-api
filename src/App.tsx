@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { getCountries } from "./api/restCountriesApi";
-import {
-  convertAPICountryObject,
-  type Country,
-  type CountriesState,
+import type {
+  Country,
+  CountriesState,
 } from "./types/country";
+import { convertAPICountryObject } from "./utils/countryUtils";
 
 function App() {
   //state is a whole state shape, and can only be one of these
