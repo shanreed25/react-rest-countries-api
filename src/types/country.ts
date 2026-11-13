@@ -52,3 +52,6 @@ export function convertAPICountryObject(apiCountryObject: ApiCountryObject): Cou
     code: apiCountryObject.codes.alpha_3,
   };
 }
+
+
+export type CountriesState = { status: "loading" } | { status: "success"; countries: Country[] } | { status: "error"; error: Error };
