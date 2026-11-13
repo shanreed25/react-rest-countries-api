@@ -1,6 +1,6 @@
-import { createCountriesUrl } from "./api/restCountriesApi";
+import { getCountries } from "./api/restCountriesApi";
 
-// console.log(createCountriesUrl());
+// getCountries().then((response) => console.log(response));
 
 
 function App() {

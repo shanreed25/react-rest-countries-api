@@ -33,8 +33,13 @@ export function createCountriesUrl(offset = 0): string {
 Send the request with the key
 needs to wait for request
 return a promise of the ApiWrapperObject type
+```
+ Can test in App.tsx with: getCountries().then((response) => console.log(response));
+ the response is an an object...{data: {…}} data.objects is an array that holds 100 country objects
+```
 */
 export async function getCountries(offset = 0): Promise<ApiWrapperObject> {
+    
   const apiKey = VITE_RESTCOUNTRIES_API_KEY;
 
   if (!apiKey) {
