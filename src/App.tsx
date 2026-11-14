@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from "react-router";
-import { useMemo, useState } from "react";
 import { CountriesList } from "./components/CountriesList";
 import { Layout } from "./components/Layout";
 import { StatusMessage } from "./components/StatusMessage";

@@ -1,4 +1,4 @@
-import type { StatusMessageProps } from "../types/country";
+import type { StatusMessageProps } from "../types/countryDisplayTypes";
 
 
 
