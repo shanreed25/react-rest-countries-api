@@ -99,3 +99,9 @@ export type StatusMessageProps = {
   children: ReactNode; 
   role?: "status" | "alert";
 };
+
+
+//layout props
+export type LayoutProps = {
+  children: ReactNode;
+};
