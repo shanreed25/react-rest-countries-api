@@ -1,22 +1,19 @@
+import { Navigate, Route, Routes } from "react-router";
 import { useMemo, useState } from "react";
 import { CountriesList } from "./components/CountriesList";
 import { Layout } from "./components/Layout";
 import { StatusMessage } from "./components/StatusMessage";
 import { useCountries } from "./hooks/useCountries";
-import { searchByName, filterByRegion, getRegions } from "./utils/countryUtils";
+import { useCountryFilters } from "./hooks/useCountriesFilters";
 import { SearchInput } from "./components/SearchInput";
 import { RegionFilter } from "./components/RegionFilter";
+import { DetailsPage } from "./pages/DetailsPage";
 
 function App() {
   const { status, error, countries } = useCountries();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [region, setRegion] = useState("");
-  const regions = useMemo(() => getRegions(countries), [countries]); //so countries are not look through on every keystroke
+  const { searchQuery, setSearchQuery, region, setRegion, regions, countriesFound } =
+    useCountryFilters(countries);
 
-  const countriesFound = useMemo(
-    () => searchByName(filterByRegion(countries, region), searchQuery),
-    [countries, region, searchQuery],
-  );
 
   if (status === "loading") {
     return (
@@ -37,11 +34,26 @@ function App() {
   return (
     <>
       <Layout>
-        <h1>Countries</h1>
-        <SearchInput value={searchQuery} onChange={setSearchQuery} />
-        <RegionFilter value={region} regions={regions} onChange={setRegion}/>
-        <p> There are {countriesFound.length} countries</p>
-        <CountriesList countries={countriesFound} />
+        <Routes>
+
+          <Route
+          path="/"
+          element={
+            <>
+              <h1>Countries</h1>
+              <SearchInput value={searchQuery} onChange={setSearchQuery} />
+              <RegionFilter value={region} regions={regions} onChange={setRegion}/>
+              <p> There are {countriesFound.length} countries</p>
+              <CountriesList countries={countriesFound} />
+            </>
+          }
+        />
+
+        <Route path="/country/:code" element={<DetailsPage />} />
+
+        <Route path="*" element={<Navigate to="/" replace />} />
+
+        </Routes>
       </Layout>
     </>
   );

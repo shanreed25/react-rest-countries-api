@@ -53,3 +53,12 @@ export function filterByRegion(
 
   return countries.filter((country) => country.region === region);
 }
+
+
+export function getCountryId(country: Country): string {
+  return country.code || country.name;
+}
+
+export function countryPath(country: Country): string {
+  return `/country/${getCountryId(country)}`;
+}

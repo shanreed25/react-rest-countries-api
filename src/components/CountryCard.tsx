@@ -1,5 +1,7 @@
 import { useState } from "react";
 import type { CountryCardProps } from "../types/countryDisplayTypes";
+import { countryPath } from "../utils/countryUtils";
+import { Link } from "react-router";
 
 function Flag({ src }: { src: string | null }) {
   // Remembers that this one image failed, so the placeholder replaces it
@@ -32,7 +34,11 @@ export function CountryCard({ country }: CountryCardProps) {
       <Flag src={country.flagPng} />
 
       <div className="p-6 pb-10">
-        <h2 className="mb-4 text-lg font-extrabold">{country.name}</h2>
+        <h2 className="mb-4 text-lg font-extrabold">
+            <Link to={countryPath(country)} className="after:absolute after:inset-0">
+                {country.name}
+            </Link>
+          </h2>
 
         <div className="space-y-1 text-sm">
           <p>

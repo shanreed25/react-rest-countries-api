@@ -33,3 +33,13 @@ export type RegionFilterProps = {
   regions: string[];
   onChange: (value: string) => void;
 };
+
+
+export type UseCountryFiltersResult = {
+  searchQuery: string;
+  setSearchQuery: (searchQuery: string) => void;
+  region: string;
+  setRegion: (region: string) => void;
+  regions: string[];
+  countriesFound: Country[];
+};
