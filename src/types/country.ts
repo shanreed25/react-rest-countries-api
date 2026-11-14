@@ -14,12 +14,12 @@ API Wrapper Object:
 
 // for { "names": { "common": "Chile" }, "codes": { "alpha_3": "CHL" } }
 export type ApiCountryObject = {
-  names: {
-    common: string;
-  };
-  codes: {
-    alpha_3: string;
-  };
+  names: { common: string };
+  codes: { alpha_3: string };
+  flag: { url_png: string };
+  population: number;
+  region: string;
+  capitals?: { name: string }[]; //some countries have no capital
 };
 
 // For API Wrapper Object: body from GET /countries/v5
@@ -39,6 +39,10 @@ export type ApiWrapperObject = {
 export type Country = {
   name: string;
   code: string;
+  flagPng: string;
+  population: number;
+  region: string;
+  capitals: string[];// some countries have more than one capital
 };
 
 /* For caching the country list that gets saved in localStorage
@@ -80,13 +84,9 @@ export type ApiErrorResponse = {
   errors?: { message: string; code: string }[];
 };
 
-
-
 // what the hook gives back to App
 export type UseCountriesResult = {
   status: CountriesState["status"]; // "loading" | "success" | "error"
   error: Error | null; // only set when status is "error"
   countries: Country[]; // the loaded list, or EMPTY_COUNTRIES before it loads
 };
-
-

@@ -10,7 +10,14 @@ from the .env file
 */
 const { VITE_RESTCOUNTRIES_API_KEY } = import.meta.env;
 
-export const RESPONSE_FIELDS = ["names.common", "codes.alpha_3"];//fields i need back, this match the ApiCountryObject type
+export const RESPONSE_FIELDS = [
+  "names.common",
+  "codes.alpha_3",
+  "flag.url_png",
+  "population",
+  "region",
+  "capitals",
+];//fields i need back, this match the ApiCountryObject type
 export const BASE_URL = "https://api.restcountries.com/countries/v5";//endpoint
 export const PAGE_SIZE = 100;//for limit 100 is the free plan maximum, to from keep from hitting the 400 Bad Request error
 const MAX_PAGES = 10;
