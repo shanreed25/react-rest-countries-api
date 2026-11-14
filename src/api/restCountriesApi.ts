@@ -1,4 +1,5 @@
 import type { ApiWrapperObject, ApiErrorResponse, Country, ApiCountryObject } from "../types/country";
+import { readCacheCountries, writeCacheCountries } from "../utils/cacheUtils";
 import { convertAPICountryObject } from "../utils/countryUtils";
 import { ApiError } from "./ApiError";
 
@@ -148,4 +149,29 @@ export async function getAllCountries(signal?: AbortSignal): Promise<Country[]> 
 
   // convert to the Country shape
   return allCountries.map(convertAPICountryObject);
+}
+
+
+/*
+function the app calls to get the countries
+get the countries from ses the cached list in localStorage
+or loads every page from the API and saves the list for next time
+*/
+export async function loadCountries(signal?: AbortSignal): Promise<Country[]> {
+  const cached = readCacheCountries();
+  if (cached) {
+    return cached;//cached countries
+  }
+
+  //if no cached countries or it is too old
+
+  //get countries from api
+  const countries = await getAllCountries(signal);
+
+  //if getAllCountries throws an error, aborts etc... nothing gets save
+
+  //only runs if every page loaded
+  writeCacheCountries(countries);
+
+  return countries;
 }

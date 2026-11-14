@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllCountries } from "./api/restCountriesApi";
+import { getAllCountries, loadCountries } from "./api/restCountriesApi";
 import type {
   CountriesState,
 } from "./types/country";
@@ -13,7 +13,7 @@ function App() {
 
   useEffect(() => {
     const controller = new AbortController();
-    getAllCountries(controller.signal) //returns a promise
+    loadCountries(controller.signal) //returns a promise
       .then((countries) => {
         setState({
           //change loading for success and save the countries
