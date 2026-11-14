@@ -9,7 +9,7 @@ function App() {
   }
 
   if (error) {
-    <StatusMessage role="alert">Error: {error.message}</StatusMessage>;
+    return <StatusMessage role="alert">Error: {error.message}</StatusMessage>;
   }
 
 

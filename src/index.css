@@ -1,6 +1,12 @@
+/*
+ tailwind styles and utility classes
+*/
 @import "tailwindcss";
 
-
+/*
+the dark theme will override these with
+   :root[data-theme="dark"]
+*/
 :root {
   color-scheme: light;
   --page-bg: hsl(0, 0%, 98%);
@@ -13,10 +19,22 @@
   --font-sans: "Nunito Sans", sans-serif;
 }
 
-
+/*
+class names that point at the variables under :root
+*/
 @theme inline {
-  --color-page-bg: var(--page);
-  --color-element-bg: var(--element);
-  --color-main-text: var(--ink);
-  --color-muted-text: var(--muted);
+  --color-page-bg: var(--page-bg);
+  --color-element-bg: var(--element-bg);
+  --color-main-text: var(--main-text);
+  --color-muted-text: var(--muted-text);
+  --shadow-soft: var(--shadow);
+}
+
+/*
+styles that apply to every page
+*/
+@layer base {
+  body {
+    @apply bg-page-bg text-main-text font-sans font-light min-h-screen;
+  }
 }
