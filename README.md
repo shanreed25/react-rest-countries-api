@@ -15,4 +15,4 @@
 - [ ] Add Theme(review other api project for theme details and convert the code from there)
 - [ ] Clean up code and add accessibility
 
-> [Reflection](./Refelection.md)
+> [Reflection](./Reflection.md)
