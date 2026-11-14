@@ -8,7 +8,7 @@ function App() {
   //state is a whole state shape, and can only be one of these
   // loading: { status: "loading" }
   // success: { status: "success", countries: [] }
-  // loading: { status: "loading", error: new Error("oops") }
+  // error: { status: "error", error: new Error("oops") }
   const [state, setState] = useState<CountriesState>({ status: "loading" }); //loading is the starting state
 
   useEffect(() => {
