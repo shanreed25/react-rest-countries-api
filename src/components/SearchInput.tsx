@@ -1,6 +1,6 @@
 import { styles } from "../styles/styles";
 import type { SearchInputProps } from "../types/countryDisplayTypes";
-import { SearchIcon } from "./SearchIcon";
+import { SearchIcon } from "./Icons";
 
 export function SearchInput({ value, onChange }: SearchInputProps) {
   return (

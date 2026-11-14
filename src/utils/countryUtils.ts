@@ -32,3 +32,24 @@ export function searchByName(countries: Country[], query: string): Country[] {
     country.name.toLowerCase().includes(searchText),
   );
 }
+
+
+export function getRegions(countries: Country[]): string[] {
+  const regions = new Set(
+    countries.map((country) => country.region).filter((region) => region !== ""),
+  );
+
+  return Array.from(regions).sort((a, b) => a.localeCompare(b));
+}
+
+// gets the countries in one region
+export function filterByRegion(
+  countries: Country[],
+  region: string,
+): Country[] {
+  if (region === "") {//empty region means "all"
+    return countries;
+  }
+
+  return countries.filter((country) => country.region === region);
+}

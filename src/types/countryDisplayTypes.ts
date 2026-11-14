@@ -27,3 +27,9 @@ export type SearchInputProps = {
   value: string;
   onChange: (value: string) => void;
 };
+
+export type RegionFilterProps = {
+  value: string;
+  regions: string[];
+  onChange: (value: string) => void;
+};
