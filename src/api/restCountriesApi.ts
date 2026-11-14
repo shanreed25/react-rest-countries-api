@@ -1,4 +1,5 @@
-import type { ApiWrapperObject, ApiErrorResponse } from "../types/country";
+import type { ApiWrapperObject, ApiErrorResponse, Country, ApiCountryObject } from "../types/country";
+import { convertAPICountryObject } from "../utils/countryUtils";
 import { ApiError } from "./ApiError";
 
 
@@ -11,6 +12,7 @@ const { VITE_RESTCOUNTRIES_API_KEY } = import.meta.env;
 export const RESPONSE_FIELDS = ["names.common", "codes.alpha_3"];//fields i need back, this match the ApiCountryObject type
 export const BASE_URL = "https://api.restcountries.com/countries/v5";//endpoint
 export const PAGE_SIZE = 100;//for limit 100 is the free plan maximum, to from keep from hitting the 400 Bad Request error
+const MAX_PAGES = 10;
 
 //Builds the request URL
 export function createCountriesUrl(offset = 0): string {
@@ -109,4 +111,41 @@ export async function getCountries(offset = 0, signal?:AbortSignal): Promise<Api
   }
 
   return response.json();
+}
+
+
+//gets every page of countries, one request after another
+export async function getAllCountries(signal?: AbortSignal): Promise<Country[]> {
+  const allCountries: ApiCountryObject[] = [];
+  let offset = 0;
+
+  /*
+  free plan only allows a max of 100 countries per request
+  so to get all 250 countries I would need at least 3 requests
+  this loop keeps going until the API says there are no more pages
+  so the code will still work if the number of countries changes
+  starts at page 1: let page = 0;
+  set a limit so the loop will send 10 request at the most in the case where
+  more: false never comes back
+  */
+
+  for (let page = 0; page < MAX_PAGES; page++) {
+
+    const res = await getCountries(offset, signal);//wait for one page from getCountries, each request waits for the one before it
+    
+    const { objects, meta } = res.data;//get the countries and the meta info
+
+    allCountries.push(...objects)
+
+    //when the API says there are no more pages stop loop
+    if (!meta.more || objects.length === 0) {
+      break;
+    }
+
+   // move offset forward by meta.count
+   offset += meta.count;
+  }
+
+  // convert to the Country shape
+  return allCountries.map(convertAPICountryObject);
 }

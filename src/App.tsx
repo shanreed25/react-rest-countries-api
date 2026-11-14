@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { getCountries } from "./api/restCountriesApi";
+import { getAllCountries } from "./api/restCountriesApi";
 import type {
-  Country,
   CountriesState,
 } from "./types/country";
-import { convertAPICountryObject } from "./utils/countryUtils";
 
 function App() {
   //state is a whole state shape, and can only be one of these
@@ -15,13 +13,12 @@ function App() {
 
   useEffect(() => {
     const controller = new AbortController();
-    getCountries(0, controller.signal) //returns a promise
-      .then((res) => {
-        const appCountries = res.data.objects.map(convertAPICountryObject);
+    getAllCountries(controller.signal) //returns a promise
+      .then((countries) => {
         setState({
           //change loading for success and save the countries
           status: "success",
-          countries: appCountries,
+          countries: countries,//getAllCountries converts the list to Country type
         });
       })
       .catch((err: unknown) => {

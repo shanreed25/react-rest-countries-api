@@ -22,15 +22,19 @@ export type ApiCountryObject = {
   };
 };
 
-
 // For API Wrapper Object: body from GET /countries/v5
 //Success Shape
 export type ApiWrapperObject = {
-  data: {//top-level key the API wraps everything in
-    objects: ApiCountryObject[];//array of countries
+  data: {
+    //top-level key the API wraps everything in
+    objects: ApiCountryObject[]; //array of countries
+    meta: {
+    count: number; // how many countries came back on this page
+    more: boolean; // true when there are more pages after this one
   };
+  };
+  
 };
-
 
 //allow app components read country.name instead of country.names.common
 export type Country = {
@@ -39,7 +43,10 @@ export type Country = {
 };
 
 //the state of the app value, can only have one of three possible states
-export type CountriesState = { status: "loading" } | { status: "success"; countries: Country[] } | { status: "error"; error: Error };
+export type CountriesState =
+  | { status: "loading" }
+  | { status: "success"; countries: Country[] }
+  | { status: "error"; error: Error };
 
 /*
 failures are wrapped in a list called errors something like:
@@ -63,5 +70,5 @@ export type ApiErrorResponse = {
   //the errors object is oprional but the message and code are not
   //if there is and error object it must have both
   //[] makes these objects a list of objects
-  errors?: {message: string; code: string;}[];
-}
+  errors?: { message: string; code: string }[];
+};
