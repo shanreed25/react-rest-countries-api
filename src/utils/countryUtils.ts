@@ -13,5 +13,9 @@ export function convertAPICountryObject(apiCountryObject: ApiCountryObject): Cou
   return {
     name: apiCountryObject.names.common,
     code: apiCountryObject.codes.alpha_3,
+    flagPng: apiCountryObject.flag?.url_png || null,//a missing flag and a blank url end up as the same value
+    population: apiCountryObject.population,
+    region: apiCountryObject.region,
+    capitals: apiCountryObject.capitals?.map((capital) => capital.name) ?? [],//I only need the name
   };
 }

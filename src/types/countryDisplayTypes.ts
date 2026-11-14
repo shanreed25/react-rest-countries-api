@@ -18,3 +18,7 @@ export type LayoutProps = {
 export type CountriesListProps = {
   countries: Country[];
 };
+
+export type CountryCardProps = {
+  country: Country;
+};

@@ -16,7 +16,7 @@ API Wrapper Object:
 export type ApiCountryObject = {
   names: { common: string };
   codes: { alpha_3: string };
-  flag: { url_png: string };
+  flag?: { url_png?: string };//a country can come back with no flag data at all and the flag could exists but the url is missing
   population: number;
   region: string;
   capitals?: { name: string }[]; //some countries have no capital
@@ -39,7 +39,7 @@ export type ApiWrapperObject = {
 export type Country = {
   name: string;
   code: string;
-  flagPng: string;
+  flagPng: string | null;
   population: number;
   region: string;
   capitals: string[];// some countries have more than one capital
