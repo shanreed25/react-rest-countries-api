@@ -10,9 +10,10 @@ the dark theme will override these with
 :root {
   color-scheme: light;
   --page-bg: hsl(0, 0%, 98%);
-  --element: hsl(0, 0%, 100%);
+  --element-bg: hsl(0, 0%, 100%);
   --main-text: hsl(200, 15%, 8%);
   --muted-text: hsl(0, 0%, 40%);
+  --shadow: 0 2px 9px hsl(0 0% 0% / 0.05);
 }
 
 @theme {
