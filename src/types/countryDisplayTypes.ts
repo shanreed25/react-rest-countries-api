@@ -22,3 +22,8 @@ export type CountriesListProps = {
 export type CountryCardProps = {
   country: Country;
 };
+
+export type SearchInputProps = {
+  value: string;
+  onChange: (value: string) => void;
+};

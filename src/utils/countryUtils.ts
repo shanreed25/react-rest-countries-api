@@ -19,3 +19,16 @@ export function convertAPICountryObject(apiCountryObject: ApiCountryObject): Cou
     capitals: apiCountryObject.capitals?.map((capital) => capital.name) ?? [],//I only need the name
   };
 }
+
+//returns the countries whose name contains the search text
+export function searchByName(countries: Country[], query: string): Country[] {
+  const searchText = query.trim().toLowerCase();
+
+  if (searchText === "") {
+    return countries;
+  }
+
+  return countries.filter((country) =>
+    country.name.toLowerCase().includes(searchText),
+  );
+}

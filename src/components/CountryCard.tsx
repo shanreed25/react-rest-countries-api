@@ -28,13 +28,7 @@ function Flag({ src }: { src: string | null }) {
 
 export function CountryCard({ country }: CountryCardProps) {
   return (
-    // overflow-hidden keeps the flag corners inside the rounded edges
     <article className="overflow-hidden rounded-md bg-element-bg shadow-soft">
-      {/* alt="" because the name right below already says which country
-          this is, so a screen reader reading both would repeat itself.
-          width and height reserve the space before the image loads, so the
-          page does not jump. aspect ratio plus object-cover make every flag
-          fill the same box, even flags with a different shape. */}
       <Flag src={country.flagPng} />
 
       <div className="p-6 pb-10">
