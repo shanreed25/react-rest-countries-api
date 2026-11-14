@@ -1,5 +1,5 @@
 import { styles } from "../styles/styles";
-import type { LayoutProps } from "../types/country";
+import type { LayoutProps } from "../types/countryDisplayTypes"
 
 
 export function Layout({children}: LayoutProps) {

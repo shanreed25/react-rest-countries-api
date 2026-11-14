@@ -1,3 +1,4 @@
+import { CountriesList } from "./components/CountriesList";
 import { Layout } from "./components/Layout";
 import { StatusMessage } from "./components/StatusMessage";
 import { useCountries } from "./hooks/useCountries";
@@ -26,6 +27,7 @@ function App() {
      <Layout>
         <h1>Countries</h1>
         <p> There are {countries.length} countries</p>
+        <CountriesList countries={countries}/>
      </Layout>
     </>
   );

@@ -1,6 +1,3 @@
-import type { ReactNode } from "react";
-
-
 /* API sends back a wrapper object with the countries inside it
 
 API Wrapper Object:
@@ -93,15 +90,3 @@ export type UseCountriesResult = {
 };
 
 
-//using children: ReactNode; so i can add anything React can render
-// lik text, a heading, a button etc....
-export type StatusMessageProps = {
-  children: ReactNode; 
-  role?: "status" | "alert";
-};
-
-
-//layout props
-export type LayoutProps = {
-  children: ReactNode;
-};
