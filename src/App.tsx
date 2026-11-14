@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react";
-import { getAllCountries, loadCountries } from "./api/restCountriesApi";
-import type {CountriesState,} from "./types/country";
+import { StatusMessage } from "./components/StatusMessage";
 import { useCountries } from "./hooks/useCountries";
 
 function App() {
   const { status, error, countries } = useCountries();
 
   if (status === "loading") {
-    return <p>Loading countries...</p>;
+    return <StatusMessage>Loading countries.....</StatusMessage>
   }
 
   if (error) {
-    return <p>Error: {error.message}</p>;
+    <StatusMessage role="alert">Error: {error.message}</StatusMessage>;
   }
 
 
