@@ -79,3 +79,12 @@ export type ApiErrorResponse = {
   //[] makes these objects a list of objects
   errors?: { message: string; code: string }[];
 };
+
+
+
+// what the hook gives back to App
+export type UseCountriesResult = {
+  status: CountriesState["status"]; // "loading" | "success" | "error"
+  error: Error | null; // only set when status is "error"
+  countries: Country[]; // the loaded list, or EMPTY_COUNTRIES before it loads
+};
