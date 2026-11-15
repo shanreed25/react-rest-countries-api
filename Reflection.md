@@ -15,6 +15,3 @@ Some countries have no flag, so the card shows a placeholder when the image is m
 ## Potential improvements
 
 - Add a details page with border countries
-- Add a light and dark theme using the Context API
-- Format population numbers with commas
-- Add tests for the utility functions

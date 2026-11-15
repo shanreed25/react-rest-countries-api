@@ -10,7 +10,7 @@
 - [X] Create Home page
 - [X] Setup Routing
 - [X] Create Details Page
-- [ ] Add Theme(review other api project for theme details and convert the code from there)
+- [X] Add Theme
 - [ ] Clean up code and add accessibility
 
 > [Reflection](./Reflection.md)
@@ -54,3 +54,18 @@
 - **`searchByName`** helper function returns all countries, when text is typed in the search input it builds a new array from the countries whose name includes the text and the original array of countries is left unchanged
 
 > The inputs are controlled inputs and only get a `value` and a `OnChange` holding no state
+
+#### Theme
+
+> The light and dark theme uses the Context API and Tailwind with CSS variables
+
+- **`index.css`** defines the colors as CSS variables 
+    - `:root` (light) and `:root[data-theme="dark"]` (dark)
+    - `@theme inline` turns them into Tailwind classes like `bg-page-bg`
+- **`ThemeProvider`** holds the `theme` state
+    - sets `data-theme` on `<html>`
+    - saves the choice with `saveTheme()`
+- **`useTheme()`** gives any component `{ theme, toggleTheme }`
+- **`getInitialTheme()`** uses the saved choice first, then the system setting `prefers-color-scheme`
+- **`ThemeToggle`** is the Dark Mode button in the header
+    - uses `aria-pressed` so screen readers know if dark mode is on
