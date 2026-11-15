@@ -1,5 +1,6 @@
 import { styles } from "../styles/styles";
 import type { CountriesListProps } from "../types/countryDisplayTypes";
+import { getCountryId } from "../utils/countryUtils";
 import { CountryCard } from "./CountryCard";
 
 /*
@@ -10,7 +11,7 @@ export function CountriesList({ countries }: CountriesListProps) {
 
     <ul role="list" className={styles.countriesList}>
       {countries.map((country) => (
-        <li key={country.code || country.name}>
+        <li key={getCountryId(country)}>
           <CountryCard country={country}/>
           </li>
       ))}

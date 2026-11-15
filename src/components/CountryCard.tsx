@@ -9,7 +9,7 @@ function Flag({ src }: { src: string | null }) {
 
   if (!src || failed) {
     return (
-      <div className="flex aspect-[33/20] w-full items-center justify-center bg-page-bg text-sm text-muted-text">
+      <div className="flex aspect-33/20 w-full items-center justify-center bg-page-bg text-sm text-muted-text">
         No flag available
       </div>
     );
@@ -23,7 +23,7 @@ function Flag({ src }: { src: string | null }) {
         height={160}
         loading="lazy"
         onError={() => setFailed(true)} //runs when the browser cannot load the image
-        className="aspect-[33/20] w-full object-cover"
+        className="aspect-33/20 w-full object-cover"
       />
   )
 }
@@ -43,13 +43,13 @@ export function CountryCard({ country }: CountryCardProps) {
         <div className="space-y-1 text-sm">
           <p>
             <span className="font-semibold">Population:</span>{" "}
-            {country.population}
+            {country.population.toLocaleString()}
           </p>
           <p>
             <span className="font-semibold">Region:</span> {country.region}
           </p>
           <p>
-            <span className="font-semibold">Capital:</span> {country.capitals}
+            <span className="font-semibold">Capital:</span> {country.capitals.join(", ")}
           </p>
         </div>
       </div>

@@ -43,7 +43,7 @@ function App() {
               <SearchInput value={searchQuery} onChange={setSearchQuery} />
               <RegionFilter value={region} regions={regions} onChange={setRegion}/>
               <p> {countriesFound.length}
-                  {countriesFound.length === 1 ? "Country" : "Countries"}
+                   {countriesFound.length === 1 ? " Country " : " Countries "}
                   Found
             </p>
               <CountriesList countries={countriesFound} />
