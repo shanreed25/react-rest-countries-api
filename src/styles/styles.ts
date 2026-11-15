@@ -7,5 +7,7 @@ export const styles ={
     searchIcon: "pointer-events-none absolute top-1/2 left-8 size-5 -translate-y-1/2 text-muted-text",
     searchInput: "w-full rounded-md bg-element-bg py-4 pr-4 pl-20 shadow-soft placeholder:text-muted-text",
     backButton: "mb-16 inline-flex items-center gap-2 rounded-md bg-element-bg px-8 py-2 shadow-soft md:mb-20",
-    detailsGrid: "text-base grid gap-11 lg:gap-28 lg:grid-cols-2 lg:items-center ",
+    detailsContainer: "text-base grid gap-11 lg:gap-28 lg:grid-cols-2 lg:items-center ",
+    countryDetails: "grid gap-8 md:grid-cols-2",
+    detailsH1: "mb-6 text-2xl font-extrabold md:text-3xl",
 }
