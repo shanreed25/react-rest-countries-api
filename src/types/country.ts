@@ -4,22 +4,35 @@ API Wrapper Object:
 {
   "data": {
     "objects": [
-      { "names": { "common": "Canada" }, "codes": { "alpha_3": "CAN" } },
-      { "names": { "common": "Chile" }, "codes": { "alpha_3": "CHL" } }
+      { "names": { "common": "Canada", "native": {...} }, "codes": { "alpha_3": "CAN" } "flag": { "url_png": "...." },
+        "population": ....,
+        "region": "...",
+        "subregion": "...",
+        "capitals": [{ .... }],
+        "tlds": ["..."],
+        "currencies": [{ "code": "...", "name": "...", "symbol": "..." }],
+        "languages": [{ "name": "..." }, { "name": "..." }, { "name": "..." }],
+        "borders": ["...", "...", "...", "..."]},
+      .....more coutries
     ],
     "meta": { "total": 249, "count": 2, "limit": 2, "offset": 0, "more": true }
   }
 }
   */
 
-// for { "names": { "common": "Chile" }, "codes": { "alpha_3": "CHL" } }
+// for one country object
 export type ApiCountryObject = {
-  names: { common: string };
+  names: { common: string, native?: Record<string, { common: string; official: string }>; };
   codes: { alpha_3: string };
   flag?: { url_png?: string };//a country can come back with no flag data at all and the flag could exists but the url is missing
   population: number;
   region: string;
   capitals?: { name: string }[]; //some countries have no capital
+  subregion?: string;
+  tlds?: string[];
+  currencies?: { code: string; name: string; symbol: string }[];
+  languages?: { name: string }[];
+  borders?: string[];//alpha-3 codes like ["USA"]
 };
 
 // For API Wrapper Object: body from GET /countries/v5
@@ -43,6 +56,12 @@ export type Country = {
   population: number;
   region: string;
   capitals: string[];// some countries have more than one capital
+  nativeName: string;
+  subregion: string;
+  tlds: string[];
+  currencies: string[];
+  languages: string[];
+  borders: string[];
 };
 
 /* For caching the country list that gets saved in localStorage

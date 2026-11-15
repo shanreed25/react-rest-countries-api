@@ -17,6 +17,12 @@ export const RESPONSE_FIELDS = [
   "population",
   "region",
   "capitals",
+  "names.native",
+  "subregion",
+  "tlds",
+  "currencies",
+  "languages",
+  "borders",
 ];//fields i need back, this match the ApiCountryObject type
 export const BASE_URL = "https://api.restcountries.com/countries/v5";//endpoint
 export const PAGE_SIZE = 100;//for limit 100 is the free plan maximum, to from keep from hitting the 400 Bad Request error
