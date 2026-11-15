@@ -51,7 +51,7 @@ function App() {
           }
         />
 
-        <Route path="/country/:code" element={<DetailsPage />} />
+        <Route path="/country/:code" element={<DetailsPage countries={countries} />} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
 

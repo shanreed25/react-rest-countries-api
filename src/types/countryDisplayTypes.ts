@@ -43,3 +43,7 @@ export type UseCountryFiltersResult = {
   regions: string[];
   countriesFound: Country[];
 };
+
+export type DetailsPageProps = {
+  countries: Country[];
+};

@@ -2,12 +2,31 @@ import type { ApiCountryObject, Country } from "../types/country";
 
 /*
 turn the ApiCountryObject into the shape of the Country type
-From: { names: { common: "Canada" }, codes: { alpha_3: "CAN" } }
-To: { name: "Canada", code: "CAN" }
-Test in App.tsx: getCountries().then((response) => {
-  console.log(response.data.objects.map(convertAPICountryObject));//Pass the function itself, without parentheses. map calls it once per item
-});
-results should be an array of 100 flat objects like { name: "Afghanistan", code: "AFG" }
+From: { "names": { "common": "Canada", "native": {...} }, "codes": { "alpha_3": "CAN" } "flag": { "url_png": "...." },
+        "population": ....,
+        "region": "...",
+        "subregion": "...",
+        "capitals": [{ .... }],
+        "tlds": ["..."],
+        "currencies": [{ "code": "...", "name": "...", "symbol": "..." }],
+        "languages": [{ "name": "..." }, { "name": "..." }, { "name": "..." }],
+        "borders": ["...", "...", "...", "..."]},
+      .....more coutries
+    }
+To: {
+  name: "...",
+  nativeName: "...",
+  code: "...",
+  flagPng: "...",
+  population: ...,
+  region: "...",
+  subregion: "...",
+  capitals: ["..."],
+  tlds: ["..."],
+  currencies: ["..."],
+  languages: ["...", "...", "..."],
+  borders: ["...", "...", "...", "..."]
+}
 */
 export function convertAPICountryObject(apiCountryObject: ApiCountryObject): Country {
   return {
@@ -17,7 +36,21 @@ export function convertAPICountryObject(apiCountryObject: ApiCountryObject): Cou
     population: apiCountryObject.population,
     region: apiCountryObject.region,
     capitals: apiCountryObject.capitals?.map((capital) => capital.name) ?? [],//I only need the name
+    nativeName: apiCountryObject.names.common,
+    subregion: apiCountryObject.subregion ?? "",
+    tlds: apiCountryObject.tlds ?? [],//it is an array of strings but a missing value needs replacing
+    currencies: apiCountryObject.currencies?.map((currency) => currency.name) ?? [],
+    languages: apiCountryObject.languages?.map((language) => language.name) ?? [],
+    borders: apiCountryObject.borders ?? [],
   };
+}
+
+export function getCountryById(countries: Country[], id: string): Country | undefined {
+  const countryId = id.toLowerCase();
+
+  const countryFound = countries.find((country) => getCountryId(country).toLowerCase() === countryId)
+
+  return countryFound
 }
 
 //returns the countries whose name contains the search text
