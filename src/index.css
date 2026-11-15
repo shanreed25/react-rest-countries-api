@@ -16,6 +16,15 @@ the dark theme will override these with
   --shadow: 0 2px 9px hsl(0 0% 0% / 0.05);
 }
 
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page-bg: hsl(207, 26%, 17%);
+  --element-bg: hsl(209, 23%, 22%);
+  --main-text: hsl(0, 100%, 100%);
+  --muted-text: hsl(0, 0%, 100%, 0.75);
+  --shadow: 0 2px 9px hsl(0 0% 0% / 0.15);
+}
+
 @theme {
   --font-sans: "Nunito Sans", sans-serif;
 }
