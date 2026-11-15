@@ -10,4 +10,6 @@ export const styles ={
     detailsContainer: "text-base grid gap-11 lg:gap-28 lg:grid-cols-2 lg:items-center ",
     countryDetails: "grid gap-8 md:grid-cols-2",
     detailsH1: "mb-6 text-2xl font-extrabold md:text-3xl",
+    bordersSection: "flex flex-col gap-4 mt-8 lg:mt-16 lg:flex-row lg:items-baseline",
+    borderLink: "inline-block rounded-sm bg-element-bg px-6 py-1 min-w-24 text-center text-sm font-light shadow-soft"
 }

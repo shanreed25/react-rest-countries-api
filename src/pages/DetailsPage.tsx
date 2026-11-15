@@ -1,6 +1,6 @@
-import { useLocation, useNavigate, useParams } from "react-router";
+import { Link, useLocation, useNavigate, useParams } from "react-router";
 import type { DetailsPageProps } from "../types/countryDisplayTypes";
-import { getBorderCountries, getCountryById, getCountryId } from "../utils/countryUtils";
+import { countryPath, getBorderCountries, getCountryById, getCountryId } from "../utils/countryUtils";
 import { ArrowLeftIcon } from "../components/Icons";
 import { styles } from "../styles/styles";
 import { Flag } from "../components/Flag";
@@ -91,11 +91,13 @@ export function DetailsPage({ countries }: DetailsPageProps) {
               </div>
             </dl>
           </div>
-          <section>
+          <section className={styles.bordersSection}>
             <h2>Border Countries</h2>
-            <ul>
+            <ul className="flex flex-wrap gap-2.5">
               {borders.map((border) => (
-                <li key={getCountryId(border)}>{border.name}</li>
+                <li key={getCountryId(border)}>
+                  <Link to={countryPath(border)} className={styles.borderLink}>{border.name}</Link>
+                  </li>
               ))}
             </ul>
 

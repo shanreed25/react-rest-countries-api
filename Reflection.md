@@ -12,6 +12,3 @@ I assumed handling error would be easier because I tried to just use what I had 
 
 Some countries have no flag, so the card shows a placeholder when the image is missing or fails to load. I had a hard time getting my environment variables to work at first so I had to learn how Vite handles environment and the API key had to be set as a build variable in Cloudflare.
 
-## Potential improvements
-
-- Add a details page with border countries
