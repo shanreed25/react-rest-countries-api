@@ -65,6 +65,21 @@ export function DetailsPage({ countries }: DetailsPageProps) {
                 <dd className="inline">{country.capitals.join(", ") || "None"}</dd>
               </div>
             </dl>
+
+            <dl className="space-y-4">
+              <div>
+                <dt className="inline font-semibold">Top Level Domain:</dt>{" "}
+                <dd className="inline">{country.tlds.join(", ") || "None"}</dd>
+              </div>
+              <div>
+                <dt className="inline font-semibold">Currencies:</dt>{" "}
+                <dd className="inline">{country.currencies.join(", ") || "None"}</dd>
+              </div>
+              <div>
+                <dt className="inline font-semibold">Languages:</dt>{" "}
+                <dd className="inline">{country.languages.join(", ") || "None"}</dd>
+              </div>
+            </dl>
           </div>
         </div>
       </article>
