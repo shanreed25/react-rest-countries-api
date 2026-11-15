@@ -5,5 +5,6 @@ export const styles ={
     layoutH1: "text-sm font-extrabold md:text-2xl",
     countriesList: "grid grid-cols-[repeat(auto-fill,minmax(min(100%,16.5rem),1fr))] gap-10 px-10 md:gap-[4.6875rem] md:px-0",
     searchIcon: "pointer-events-none absolute top-1/2 left-8 size-5 -translate-y-1/2 text-muted-text",
-    searchInput: "w-full rounded-md bg-element-bg py-4 pr-4 pl-20 shadow-soft placeholder:text-muted-text"
+    searchInput: "w-full rounded-md bg-element-bg py-4 pr-4 pl-20 shadow-soft placeholder:text-muted-text",
+    backButton: "mb-16 inline-flex items-center gap-2 rounded-md bg-element-bg px-8 py-2 shadow-soft md:mb-20",
 }
