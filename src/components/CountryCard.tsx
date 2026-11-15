@@ -30,7 +30,7 @@ function Flag({ src }: { src: string | null }) {
 
 export function CountryCard({ country }: CountryCardProps) {
   return (
-    <article className="overflow-hidden rounded-md bg-element-bg shadow-soft">
+    <article className="position: relative overflow-hidden rounded-md bg-element-bg shadow-soft">
       <Flag src={country.flagPng} />
 
       <div className="p-6 pb-10">

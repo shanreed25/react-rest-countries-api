@@ -2,8 +2,9 @@ import type { RegionFilterProps } from "../types/countryDisplayTypes";
 import { ChevronIcon } from "./Icons";
 
 /*
-A controlled select: the selected region lives in App, and this component
-shows it (value) and reports changes (onChange).
+A controlled select: the selected region lives useCountryFilters hook, 
+which App calls, and this component shows it (value) and reports 
+changes (onChange).
 */
 export function RegionFilter({ value, regions, onChange }: RegionFilterProps) {
   return (
