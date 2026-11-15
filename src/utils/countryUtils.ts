@@ -95,3 +95,10 @@ export function getCountryId(country: Country): string {
 export function countryPath(country: Country): string {
   return `/country/${getCountryId(country)}`;
 }
+
+
+export function getBorderCountries(countries: Country[], borderCodes: string[]): Country[] {
+  return borderCodes
+    .map((code) => getCountryById(countries, code))//gives a country or undefined
+    .filter((country): country is Country => country !== undefined)//remove undefined
+}

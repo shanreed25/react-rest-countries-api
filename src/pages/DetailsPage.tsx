@@ -1,6 +1,6 @@
 import { useLocation, useNavigate, useParams } from "react-router";
 import type { DetailsPageProps } from "../types/countryDisplayTypes";
-import { getCountryById } from "../utils/countryUtils";
+import { getBorderCountries, getCountryById, getCountryId } from "../utils/countryUtils";
 import { ArrowLeftIcon } from "../components/Icons";
 import { styles } from "../styles/styles";
 import { Flag } from "../components/Flag";
@@ -26,6 +26,9 @@ export function DetailsPage({ countries }: DetailsPageProps) {
     return <p>No country found for "{code}"</p>;
   }
 
+  const borders = getBorderCountries(countries, country.borders)
+
+
   return (
     <>
       <button type="button" onClick={handleBack} className={styles.backButton}>
@@ -42,7 +45,6 @@ export function DetailsPage({ countries }: DetailsPageProps) {
         <div>
           <h1 className={styles.detailsH1}>{country.name}</h1>
           <div className={styles.countryDetails}>
-            
             <dl className="space-y-4">
               <div>
                 <dt className="inline font-semibold">Native Name:</dt>{" "}
@@ -50,7 +52,9 @@ export function DetailsPage({ countries }: DetailsPageProps) {
               </div>
               <div>
                 <dt className="inline font-semibold">Population:</dt>{" "}
-                <dd className="inline">{country.population.toLocaleString() || "None"}</dd>
+                <dd className="inline">
+                  {country.population.toLocaleString() || "None"}
+                </dd>
               </div>
               <div>
                 <dt className="inline font-semibold">Region:</dt>{" "}
@@ -62,7 +66,9 @@ export function DetailsPage({ countries }: DetailsPageProps) {
               </div>
               <div>
                 <dt className="inline font-semibold">Captial:</dt>{" "}
-                <dd className="inline">{country.capitals.join(", ") || "None"}</dd>
+                <dd className="inline">
+                  {country.capitals.join(", ") || "None"}
+                </dd>
               </div>
             </dl>
 
@@ -73,14 +79,27 @@ export function DetailsPage({ countries }: DetailsPageProps) {
               </div>
               <div>
                 <dt className="inline font-semibold">Currencies:</dt>{" "}
-                <dd className="inline">{country.currencies.join(", ") || "None"}</dd>
+                <dd className="inline">
+                  {country.currencies.join(", ") || "None"}
+                </dd>
               </div>
               <div>
                 <dt className="inline font-semibold">Languages:</dt>{" "}
-                <dd className="inline">{country.languages.join(", ") || "None"}</dd>
+                <dd className="inline">
+                  {country.languages.join(", ") || "None"}
+                </dd>
               </div>
             </dl>
           </div>
+          <section>
+            <h2>Border Countries</h2>
+            <ul>
+              {borders.map((border) => (
+                <li key={getCountryId(border)}>{border.name}</li>
+              ))}
+            </ul>
+
+          </section>
         </div>
       </article>
     </>

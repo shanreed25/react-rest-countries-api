@@ -49,8 +49,6 @@ export type DetailsPageProps = {
 };
 
 
-
-
 export type FlagProps = {
   src: string | null;
   alt?: string;
