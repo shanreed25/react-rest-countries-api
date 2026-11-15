@@ -1,5 +1,6 @@
 export const styles ={
     layoutHeader: "bg-element-bg shadow-soft",
+    layoutHeaderRow: "flex items-center justify-between gap-4 py-6",
     container: "mx-auto max-w-7xl px-4 md:px-10 lg:px-20",
     layoutH1: "text-sm font-extrabold md:text-2xl",
     countriesList: "grid grid-cols-[repeat(auto-fill,minmax(min(100%,16.5rem),1fr))] gap-10 px-10 md:gap-[4.6875rem] md:px-0",
