@@ -3,6 +3,7 @@ import type { DetailsPageProps } from "../types/countryDisplayTypes";
 import { getCountryById } from "../utils/countryUtils";
 import { ArrowLeftIcon } from "../components/Icons";
 import { styles } from "../styles/styles";
+import { Flag } from "../components/Flag";
 
 export function DetailsPage({ countries }: DetailsPageProps) {
   const { code = "" } = useParams();
@@ -32,7 +33,8 @@ export function DetailsPage({ countries }: DetailsPageProps) {
         <ArrowLeftIcon className="size-5" />
         Back
       </button>
-      <article>
+      <article className={styles.detailsGrid}>
+        <Flag key={code} src={country.flagPng} alt={`Flag for ${country.name}`} className="shadow-soft" />
         <h1>{country.name}</h1>
         <pre>{JSON.stringify(country, null, 2)}</pre>
       </article>

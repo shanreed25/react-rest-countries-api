@@ -47,3 +47,10 @@ export type UseCountryFiltersResult = {
 export type DetailsPageProps = {
   countries: Country[];
 };
+
+
+export type FlagProps = {
+  src: string | null;
+  alt?: string;//"" (the default) means decorative, the card's heading already names the country
+  className?: string;//extra classes from the page that uses it, like a shadow
+};
