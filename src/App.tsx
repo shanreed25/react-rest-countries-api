@@ -10,9 +10,14 @@ import { DetailsPage } from "./pages/DetailsPage";
 
 function App() {
   const { status, error, countries } = useCountries();
-  const { searchQuery, setSearchQuery, region, setRegion, regions, countriesFound } =
-    useCountryFilters(countries);
-
+  const {
+    searchQuery,
+    setSearchQuery,
+    region,
+    setRegion,
+    regions,
+    countriesFound,
+  } = useCountryFilters(countries);
 
   if (status === "loading") {
     return (
@@ -34,27 +39,36 @@ function App() {
     <>
       <Layout>
         <Routes>
+          <Route
+            path="/"
+            element={
+              <div className="flex flex-col gap-15">
+                {/* <h1>Countries</h1> */}
+                <div className="flex justify-between">
+                  <SearchInput value={searchQuery} onChange={setSearchQuery} />
+                  <RegionFilter
+                    value={region}
+                    regions={regions}
+                    onChange={setRegion}
+                  />
+                </div>
+                {/* <p>
+                  {" "}
+                  {countriesFound.length}
+                  {countriesFound.length === 1 ? " Country " : " Countries "}
+                  Found
+                </p> */}
+                <CountriesList countries={countriesFound} />
+              </div>
+            }
+          />
 
           <Route
-          path="/"
-          element={
-            <>
-              <h1>Countries</h1>
-              <SearchInput value={searchQuery} onChange={setSearchQuery} />
-              <RegionFilter value={region} regions={regions} onChange={setRegion}/>
-              <p> {countriesFound.length}
-                   {countriesFound.length === 1 ? " Country " : " Countries "}
-                  Found
-            </p>
-              <CountriesList countries={countriesFound} />
-            </>
-          }
-        />
+            path="/country/:code"
+            element={<DetailsPage countries={countries} />}
+          />
 
-        <Route path="/country/:code" element={<DetailsPage countries={countries} />} />
-
-        <Route path="*" element={<Navigate to="/" replace />} />
-
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>
     </>

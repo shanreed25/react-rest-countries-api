@@ -92,7 +92,7 @@ export function DetailsPage({ countries }: DetailsPageProps) {
             </dl>
           </div>
           <section className={styles.bordersSection}>
-            <h2>Border Countries</h2>
+            <h2>Border Countries:</h2>
             <ul className="flex flex-wrap gap-2.5">
               {borders.map((border) => (
                 <li key={getCountryId(border)}>
